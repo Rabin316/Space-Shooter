@@ -1,7 +1,7 @@
 /* Game configuration */
 var config = {
     width: 800,
-    height: 600,
+    height: 450,
     background: 'black',
     scene: [Scene1, Scene2],
 }
