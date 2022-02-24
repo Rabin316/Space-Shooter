@@ -7,11 +7,11 @@ class Scene1 extends Phaser.Scene {
     preload()   //loads image
     {
         this.load.image("background", "assets/background/bg-preview-big.png");
-        this.load.image("enemy1", "assets/enemy/sprites/enemy1.png");
-        // this.load.image("enemy2", "assets/enemy/sprites/enemy2.png");
-        // this.load.image("enemy3", "assets/enemy/sprites/enemy3.png");
+        this.load.image("ship1", "assests1/ship1.png");
+        this.load.image("ship2", "assests1/ship2.png");
+        this.load.image("ship3", "assests1/ship3.png");
     }
     create() {
-        this.scene.start("PLayGame");   //switches  to Scene2
+        this.scene.start("PlayGame");   //switches  to Scene2
     }
 }
