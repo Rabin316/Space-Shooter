@@ -2,6 +2,7 @@ class Scene2 extends Phaser.Scene {
     constructor() {
         super("PlayGame");
     }
+    //loaded image will be created 
     create() {
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
@@ -68,23 +69,27 @@ class Scene2 extends Phaser.Scene {
         this.input.on('gameobjectdown', this.destroyShip, this);
 
     }
+    //for moving ships y-axis and repeats and appears at random position from the top after reaching bottom of canvas width
     moveShip(ship, speed) {
         ship.y += speed;
         if (ship.y > config.height) {
             this.resetShipPos(ship);
         }
     }
+    //repeats the movement of ships
     resetShipPos(ship) {
         ship.y = 0;
         var randomX = Phaser.Math.Between(0, config.width);
         ship.x = randomX;
     }
 
+    //for animation of explosion after being clicked
     destroyShip(pointer, gameObject) {
         gameObject.setTexture("explosion");
         gameObject.play("explode");
     }
 
+    //upadte function for updating the objects
     update() {
         //this.ship2.angle += 3;
         this.moveShip(this.ship1, 2);
