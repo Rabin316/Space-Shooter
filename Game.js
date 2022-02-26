@@ -4,8 +4,9 @@ var gameSettings = {
 }
 var config = {
     width: 500,
-    height: 490,
+    height: 500,
     autoCenter: true,
+    noMargins: false,
     background: 'black',
     scene: [Scene1, Scene2],
     pixelArt: true,
