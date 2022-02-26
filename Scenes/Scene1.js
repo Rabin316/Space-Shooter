@@ -39,7 +39,13 @@ class Scene1 extends Phaser.Scene {
         this.load.spritesheet("player", "assests1/spritesheets/player.png", {
             frameWidth: 16,
             frameHeight: 24
-        })
+        });
+
+        //for bullets
+        this.load.spritesheet("beam", "assests1/spritesheets/beam.png", {
+            frameWidth: 16,
+            frameHeight: 16,
+        });
 
 
     }
@@ -77,13 +83,21 @@ class Scene1 extends Phaser.Scene {
             frameRate: 20,
             //disappear after collision
             repeat: 0,
-            hideOnComplete: true,
+            hideOnComplete: true,   //explosion will hide after completion
         });
 
         //for player
         this.anims.create({
             key: "thrust",
             frames: this.anims.generateFrameNumbers("player"),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        //for bullets
+        this.anims.create({
+            key: "beam_anim",
+            frames: this.anims.generateFrameNumbers("beam"),
             frameRate: 20,
             repeat: -1
         });

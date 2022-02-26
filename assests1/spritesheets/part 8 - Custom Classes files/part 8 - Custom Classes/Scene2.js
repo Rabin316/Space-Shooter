@@ -5,7 +5,7 @@ class Scene2 extends Phaser.Scene {
 
   create() {
 
-    this.background = this.add.tileSprite(0, 0, config.width, config.height , "background");
+    this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
     this.background.setOrigin(0, 0);
 
     this.ship1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "ship");
@@ -36,7 +36,7 @@ class Scene2 extends Phaser.Scene {
     for (var i = 0; i < gameSettings.maxPowerups; i++) {
       var powerUp = this.physics.add.sprite(16, 16, "power-up");
       this.powerUps.add(powerUp);
-       powerUp.setRandomPosition(0, 0, game.config.width, game.config.height);
+      powerUp.setRandomPosition(0, 0, game.config.width, game.config.height);
 
       if (Math.random() > 0.5) {
         powerUp.play("red");
@@ -81,12 +81,12 @@ class Scene2 extends Phaser.Scene {
     this.movePlayerManager();
 
 
-    if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
-        // 2.1 call a function to create a beam instance
-        this.shootBeam();
+    if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+      // 2.1 call a function to create a beam instance
+      this.shootBeam();
     }
     // 4.2 update all the beams
-    for(var i = 0; i < this.projectiles.getChildren().length; i++){
+    for (var i = 0; i < this.projectiles.getChildren().length; i++) {
       var beam = this.projectiles.getChildren()[i];
       beam.update();
     }
@@ -95,25 +95,25 @@ class Scene2 extends Phaser.Scene {
   }
 
   // 2.2 create the shootBeam function
-  shootBeam(){
+  shootBeam() {
     // 4.2 add the beam to the croup
     var beam = new Beam(this);
   }
 
 
-  movePlayerManager(){
+  movePlayerManager() {
 
     this.player.setVelocity(0);
 
-    if(this.cursorKeys.left.isDown){
+    if (this.cursorKeys.left.isDown) {
       this.player.setVelocityX(-gameSettings.playerSpeed);
-    }else if(this.cursorKeys.right.isDown){
+    } else if (this.cursorKeys.right.isDown) {
       this.player.setVelocityX(gameSettings.playerSpeed);
     }
 
-    if(this.cursorKeys.up.isDown){
+    if (this.cursorKeys.up.isDown) {
       this.player.setVelocityY(-gameSettings.playerSpeed);
-    }else if(this.cursorKeys.down.isDown){
+    } else if (this.cursorKeys.down.isDown) {
       this.player.setVelocityY(gameSettings.playerSpeed);
     }
   }

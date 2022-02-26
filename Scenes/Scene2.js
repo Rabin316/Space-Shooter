@@ -88,8 +88,9 @@ class Scene2 extends Phaser.Scene {
         this.player.setCollideWorldBounds(true);
 
         //event spacebar key
+        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-
+        this.projectiles = this.add.group();
 
     }
 
@@ -132,9 +133,24 @@ class Scene2 extends Phaser.Scene {
         this.movePlayerManager();
 
         //Event for the player shooting, just once per key pressing
-        /* if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-            console.log("Fire!");
-        } */
+        //JustDown event will be activated only once each key is pressed
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+            //calling a function to create beam(bullet)
+            this.shootBeam();
+        }
+
+        //update all the beam bullets
+        for (var i = 0; i < this.projectiles.getChildren().length; i++) {
+            var beam = this.projectiles.getChildren()[i];
+            beam.update();
+        }
+    }
+    //shootbeam function
+    /*  shootBeam() {
+         var beam =this.physics.add.sprite(this.player.x,this.player.y,"beam");
+     } */
+    shootBeam() {
+        var beam = new Beam(this);
     }
     //function  for player movement
     movePlayerManager() {

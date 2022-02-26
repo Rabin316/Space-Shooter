@@ -17,5 +17,5 @@ var config = {
         }
     }
 }
-//Decaration of our game
+//Declaration of our game
 var game = new Phaser.Game(config);
