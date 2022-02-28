@@ -5,6 +5,7 @@ class Scene2 extends Phaser.Scene {
 
     //function create for image creation after loading
     create() {
+
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
         // this.asteroid = this.add.image(config.width / 2, config.height / 2, "asteroid");
@@ -108,9 +109,28 @@ class Scene2 extends Phaser.Scene {
 
         //Overlap function between player and enemies ship
         this.physics.add.overlap(this.player, this.enemies, this.damageplayer, null, this);
-        this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this)
+        this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
+
+        //Adding HUD/background  property for SCore
+        var graphics = this.add.graphics();
+        graphics.fillStyle(0x000000, 1);
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(config.width, 0);
+        graphics.lineTo(config.width, 20);
+        graphics.lineTo(0, 20);
+        graphics.lineTo(0, 0);
+
+        graphics.closePath();
+        graphics.fillPath();
+
+        //for SCore
+        this.score = 0;
+        //var formatscore = this.scorezero(this.score, 6)
+        this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 16);
 
     }
+
 
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
@@ -146,6 +166,10 @@ class Scene2 extends Phaser.Scene {
         var explosion = new Explosion(this, enemy.x, enemy.y);
         projectile.destroy();
         this.resetShipPos(enemy);
+        //for counting score
+        this.score += 10;
+        //var formatscore = this.scorezero(this.score, 6);
+        this.scorevalue.text = "SCORE: " + this.score;   //can also put FormatSCore instead of this.score 
     }
 
     //function for moving ships y-axis and repeats and appears at random position from the top after reaching bottom of game config
@@ -166,6 +190,14 @@ class Scene2 extends Phaser.Scene {
     destroyShip(pointer, gameObject) {
         gameObject.setTexture("explosion");
         gameObject.play("explode");
+    }
+
+    scorezero(number, size) {
+        var stringNumber = String(number);
+        while (stringNumber.length < (size || 2)) {
+            stringNumber = "0" + stringNumber;
+        }
+        return stringNumber;
     }
 
     //upadte function for updating the objects

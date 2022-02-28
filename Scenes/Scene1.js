@@ -47,7 +47,8 @@ class Scene1 extends Phaser.Scene {
             frameHeight: 16,
         });
 
-
+        //loading Font for Score label
+        this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
     }
     create() {
         this.scene.start("PlayGame");   //switches  to Scene2 i.e calls scene 2 and access it properties
