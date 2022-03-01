@@ -6,17 +6,19 @@ var config = {
     width: 500,
     height: 500,
     autoCenter: true,
-    noMargins: false,
     background: 'black',
-    scene: [Scene1, Scene2],
+    scene: [mainscreen, control, Scene1, Scene2],
     pixelArt: true,
     //setting up  game physics
     physics: {
         default: "arcade",
         arcade: {
-            debug: false,
+            debug: true,
         }
     }
 }
-//Declaration of our game
+//Declaration of our game object
 var game = new Phaser.Game(config);
+/* var resscene = this.scene.get("Scene2");
+resscene.scene.restart(); */
+game.scene.start('loadscreen');

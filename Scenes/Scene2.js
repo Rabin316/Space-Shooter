@@ -110,8 +110,8 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemies, this.damageplayer, null, this);
         this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this)
 
-    }
 
+    }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
            powerUp.disableBody(true, true);        //using disable phyics
@@ -132,6 +132,7 @@ class Scene2 extends Phaser.Scene {
             callbackScope: this,
             loop: false,
         });
+
     }
 
     //function resetPlayer()
@@ -166,6 +167,7 @@ class Scene2 extends Phaser.Scene {
     destroyShip(pointer, gameObject) {
         gameObject.setTexture("explosion");
         gameObject.play("explode");
+
     }
 
     //upadte function for updating the objects
