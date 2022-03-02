@@ -5,117 +5,160 @@ class mainscreen extends Phaser.Scene {
     preload() {
         this.load.image("background", "assets/background/bg-preview-big.png");
         //this.load.image("btn1", "assests1/start.png")
-        /*             this.load.spritesheet("ship1", "assests1/spritesheets/ship1.png", {
-                        frameWidth: 16,
-                        frameHeight: 16
-                    });
-                    this.load.spritesheet("ship2", "assests1/spritesheets/ship2.png", {
-                        frameWidth: 32,
-                        frameHeight: 16,
-                    });
-                    this.load.spritesheet("ship3", "assests1/spritesheets/ship3.png", {
-                        frameWidth: 32,
-                        frameHeight: 32,
-                    });
-            
-                    this.load.spritesheet("explosion", "assests1/spritesheets/explosion.png", {
-                        frameWidth: 16,
-                        frameWidth: 16,
-                    }); */
+        this.load.image("asteroid", "assets/asteroids/asteroid.png");
+
+        this.load.spritesheet("ship1", "assests1/spritesheets/ship1.png", {
+            frameWidth: 16,
+            frameHeight: 16
+        });
+        this.load.spritesheet("ship2", "assests1/spritesheets/ship2.png", {
+            frameWidth: 32,
+            frameHeight: 16,
+        });
+        this.load.spritesheet("ship3", "assests1/spritesheets/ship3.png", {
+            frameWidth: 32,
+            frameHeight: 32,
+        });
+
+        this.load.spritesheet("explosion", "assests1/spritesheets/explosion.png", {
+            frameWidth: 16,
+            frameWidth: 16,
+        });
+        //for player
+        this.load.spritesheet("player", "assests1/spritesheets/player.png", {
+            frameWidth: 16,
+            frameHeight: 24
+        });
+        //start image
+        this.load.image("start1", "assests1/start1.png");
+        this.load.image("control", "assests1/control.png")
+        this.load.image("title", "assests1/title.png");
+        //for bitmap text
+        this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
+
+
     }
 
     create() {
         this.bg = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.bg.setOrigin(0, 0);
+        this.title1 = this.add.image(config.width / 2, config.height * 0.30, "title").setScale(0.9);
+        this.title1.setDepth(1);
+        let playbutton = this.add.image(config.width / 2, config.height / 2, "start1").setScale(0.6);
+        playbutton.setDepth(1);
+        let controlbtn = this.add.image(config.width / 2, config.height / 2 + 40, "control").setScale(0.6);
+        controlbtn.setDepth(1);
+        // let hoverplayer = this.add.sprite(0, 0, "player").setInteractive();
+        // hoverplayer.setVisible(false);
 
-        /*  this.ship1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "ship1");
-         this.ship1.setScale(2);
-         this.ship2 = this.add.sprite(config.width / 2, config.height / 2, "ship2");
-         this.ship3 = this.add.sprite(config.width / 2 + 50, config.height / 2, "ship3");
- 
-         this.anims.create({
-             key: "ship1_anim",  //creating animation
-             frames: this.anims.generateFrameNumbers("ship1"),
-             frameRate: 20,
-             repeat: -1
-         });
- 
-         //for ship2
-         this.anims.create({
-             key: "ship2_anim",  //creating animation
-             frames: this.anims.generateFrameNumbers("ship2"),
-             frameRate: 20,
-             repeat: -1
-         });
- 
-         //for ship3
-         this.anims.create({
-             key: "ship3_anim",  //creating animation
-             frames: this.anims.generateFrameNumbers("ship3"),
-             frameRate: 20,
-             repeat: -1
-         });
- 
-         //for playing the animations
-         this.ship1.play("ship1_anim");
-         this.ship2.play("ship2_anim");
-         this.ship3.play("ship3_anim");
- 
-         //for making ships destryable by clicking
-         this.ship1.setInteractive();
-         this.ship2.setInteractive();
-         this.ship3.setInteractive();
-         //this.asteroid.setInteractive(); */
+        this.asteroid = this.add.image(config.width / 2, config.height / 2, "asteroid");
+        this.asteroid.setScale(0.9);
 
-        //Clickable button image
-        /*  var btn = this.add.image(0, 0, "btn1");
-         btn.setOrigin(0, 0);
-         btn.setScale(0.1);
-         btn.setInteractive({
-             useHandCursor: true
-         });
-         btn.on('pointerdown', () => this.clickButton(
-             this.scene.switch("BootGame")
-         )) */
-        // var title = this.add.text(100, 100, "SPACE SHOOTER 2D");
-        var text1 = this.add.text(200, 200, "Start");
-        text1.setInteractive(    //for making text interractive
-            {
-                useHandCursor: true
-            });
-        text1.on('pointerdown', () => this.clickButton(
-            this.scene.switch("BootGame")       //enters Scene1 and to Scene 2 after clicked
-        ));
-        //Enter Control SCene
-        var text2 = this.add.text(200, 240, "Controls");
-        text2.setInteractive(    //for making text interractive
-            {
-                useHandCursor: true
-            });
-        text2.on('pointerdown', () => this.clickButton(
-            this.scene.switch("View")
-        ));
+        this.ship1 = this.add.sprite(config.width / 2 - 50, config.height, "ship1");
+        this.ship1.setScale(2);
+        this.ship2 = this.add.sprite(config.width / 2, config.height, "ship2");
+        this.ship3 = this.add.sprite(config.width / 2 + 50, config.height, "ship3");
+        let hoversprite = this.add.sprite(100, 100, "player");
+        hoversprite.setVisible(false);
+        this.anims.create({
+            key: "ship1_anim",  //creating animation
+            frames: this.anims.generateFrameNumbers("ship1"),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        //for ship2
+        this.anims.create({
+            key: "ship2_anim",  //creating animation
+            frames: this.anims.generateFrameNumbers("ship2"),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        //for ship3
+        this.anims.create({
+            key: "ship3_anim",  //creating animation
+            frames: this.anims.generateFrameNumbers("ship3"),
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "player_anim",
+            frames: this.anims.generateFrameNumbers("player"),
+            frameRate: 20,
+            repeat: -1
+        });
+        //for playing the animations
+        this.ship1.play("ship1_anim");
+        this.ship2.play("ship2_anim");
+        this.ship3.play("ship3_anim");
+        hoversprite.play("player_anim");
+        //for making ships destroyable by clicking
+        this.ship1.setInteractive();
+        this.ship2.setInteractive();
+        this.ship3.setInteractive();
+        this.asteroid.setInteractive();
+
+        //this scection is for options i.e MAIN MENU
+
+        //var title = this.add.bitmapText(100, 150, "pixelFont", "SPACE SHOOTER 2D", 50);
+
+        //for mouse hovering part
+        //for playbutton
+        playbutton.setInteractive({
+            useHandCursor: true
+        });
+        playbutton.on("pointerover", () => {
+            hoversprite.setVisible(true);
+            hoversprite.x = playbutton.x - playbutton.width + 50;
+            hoversprite.y = playbutton.y;
+        });
+        playbutton.on('pointerout', () => {
+            hoversprite.setVisible(false)
+        })
+        //for controlbtn
+        controlbtn.setInteractive({
+            useHandCursor: true
+        });
+        controlbtn.on("pointerover", () => {
+            hoversprite.setVisible(true);
+            hoversprite.x = controlbtn.x - controlbtn.width + 96;
+            hoversprite.y = controlbtn.y;
+        });
+        controlbtn.on('pointerout', () => {
+            hoversprite.setVisible(false)
+        })
+
+        //this part is for scene change by clicking
+        playbutton.on('pointerdown', () => {
+            this.scene.switch("BootGame");
+        });
+        controlbtn.on('pointerdown', () => {
+            this.scene.switch("View");
+        });
 
     }
-    /*  moveShip(ship, speed) {
-         ship.y += speed;
-         if (ship.y > config.height) {
-             this.resetShipPos(ship);
-         }
-     }
-     //repeats the movement of ships
-     resetShipPos(ship) {
-         ship.y = 0;
-         var randomX = Phaser.Math.Between(0, config.width);
-         ship.x = randomX;
-     } */
+    moveShip(ship, speed) {
+        ship.y += speed;
+        if (ship.y > config.height) {
+            this.resetShipPos(ship);
+        }
+    }
+    //repeats the movement of ships
+    resetShipPos(ship) {
+        ship.y = 0;
+        var randomX = Phaser.Math.Between(0, config.width);
+        ship.x = randomX;
+    }
     update() {
-        //make images y-axis tile for repetation
+        //make background images y-axis tile for repetation
         this.bg.tilePositionY -= 0.5;
+        this.asteroid.angle += 3;
 
         //calling function moveShip
-        // this.moveShip(this.ship1, 2);
-        // this.moveShip(this.ship2, 2.5);
-        // this.moveShip(this.ship3, 3);
+        this.moveShip(this.ship1, 2);
+        this.moveShip(this.ship2, 2.5);
+        this.moveShip(this.ship3, 3);
+        this.moveShip(this.asteroid, 2.5);
     }
 }

@@ -16,10 +16,10 @@ class Scene2 extends Phaser.Scene {
         // this.ship3 = this.add.image(config.width / 2 + 50, config.height / 2, "ship3");
 
         //using sprites
-        this.ship1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "ship1");
+        this.ship1 = this.add.sprite(config.width / 2 - 50, config.height, "ship1");
         this.ship1.setScale(2);
-        this.ship2 = this.add.sprite(config.width / 2, config.height / 2, "ship2");
-        this.ship3 = this.add.sprite(config.width / 2 + 50, config.height / 2, "ship3");
+        this.ship2 = this.add.sprite(config.width / 2, config.height, "ship2");
+        this.ship3 = this.add.sprite(config.width / 2 + 50, config.height, "ship3");
         // this.ship1.setScale(2);
         // this.ship1.flipY = true;
         // this.ship2.flipY = true;
@@ -178,9 +178,9 @@ class Scene2 extends Phaser.Scene {
         // this.moveShip(this.asteroid, 2.5);
 
         //calling function moveShip
-        this.moveShip(this.ship1, 2);
-        this.moveShip(this.ship2, 2.5);
-        this.moveShip(this.ship3, 3);
+        this.moveShip(this.ship1, 1.6);
+        this.moveShip(this.ship2, 2);
+        this.moveShip(this.ship3, 1.8);
 
         //make images y-axis tile for repetation
         this.background.tilePositionY -= 0.5;
