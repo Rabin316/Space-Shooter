@@ -31,7 +31,7 @@ class mainscreen extends Phaser.Scene {
             frameHeight: 24
         });
         //start image
-        this.load.image("start1", "assests1/start1.png");
+        this.load.image("start", "assests1/start.png");
         this.load.image("control", "assests1/control.png")
         this.load.image("title", "assests1/title.png");
         //for bitmap text
@@ -43,9 +43,9 @@ class mainscreen extends Phaser.Scene {
     create() {
         this.bg = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.bg.setOrigin(0, 0);
-        this.title1 = this.add.image(config.width / 2, config.height * 0.30, "title").setScale(0.9);
+        this.title1 = this.add.image(config.width / 2, config.height * 0.30, "title").setScale(0.8);
         this.title1.setDepth(1);
-        let playbutton = this.add.image(config.width / 2, config.height / 2, "start1").setScale(0.6);
+        let playbutton = this.add.image(config.width / 2, config.height / 2, "start").setScale(0.6);
         playbutton.setDepth(1);
         let controlbtn = this.add.image(config.width / 2, config.height / 2 + 40, "control").setScale(0.6);
         controlbtn.setDepth(1);
@@ -123,7 +123,7 @@ class mainscreen extends Phaser.Scene {
         });
         controlbtn.on("pointerover", () => {
             hoversprite.setVisible(true);
-            hoversprite.x = controlbtn.x - controlbtn.width + 96;
+            hoversprite.x = controlbtn.x - controlbtn.width + 143;
             hoversprite.y = controlbtn.y;
         });
         controlbtn.on('pointerout', () => {
