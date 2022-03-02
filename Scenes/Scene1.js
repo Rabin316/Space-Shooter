@@ -6,8 +6,8 @@ class Scene1 extends Phaser.Scene {
     }
     preload()   //loads image or spritesheets ( multiple  same images with frames)
     {
-
-        this.load.image("background", "assets/background/bg-preview-big.png");
+        this.load.image("background", "assests1/preview.png");
+        // this.load.image("background", "assets/background/bg-preview-big.png");
         // this.load.image("ship2", "assests1/ship2.png");
         //this.load.image("ship1","assests1/ship1.png");
         // this.load.image("ship3", "assests1/ship3.png");

@@ -3,7 +3,8 @@ class mainscreen extends Phaser.Scene {
         super('loadscreen') // for calling the parameter
     }
     preload() {
-        this.load.image("background", "assets/background/bg-preview-big.png");
+        this.load.image("background", "assests1/preview.png");
+        //this.load.image("background", "assets/background/bg-preview-big.png");
         //this.load.image("btn1", "assests1/start.png")
         this.load.image("asteroid", "assets/asteroids/asteroid.png");
 
