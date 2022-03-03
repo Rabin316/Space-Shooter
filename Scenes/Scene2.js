@@ -2,7 +2,10 @@ class Scene2 extends Phaser.Scene {
     constructor() {
         super("PlayGame");  //passing parameter
     }
-
+    preload() {
+        this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
+        this.load.image("left", "assests1/left.png");
+    }
     //function create for image creation after loading
     create() {
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
@@ -108,7 +111,16 @@ class Scene2 extends Phaser.Scene {
 
         //Overlap function between player and enemies ship
         this.physics.add.overlap(this.player, this.enemies, this.damageplayer, null, this);
-        this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this)
+        this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
+
+        var turn = this.add.image(config.width / 2, config.height * 0.93, "left").setScale(0.15);
+        turn.setInteractive({
+            useHandCursor: true
+        });
+        turn.on('pointerdown', () => this.clickButton(
+            this.scene.restart(),
+            this.scene.switch("loadscreen")
+        ));
 
 
     }
@@ -120,11 +132,14 @@ class Scene2 extends Phaser.Scene {
     //callback function for damageplayer line 111
     damageplayer(player, enemy) {
         this.resetShipPos(enemy);   //resets position enemy ships
+
+        // this.scene.pause();       for pausing when player get hit
         //resets position of player
         // player.x = config.width / 2 - 8;
         // player.y = config.height - 64;
         var explosion = new Explosion(this, player.x, player.y);
         player.disableBody(true, true);//disable the ship and hide it after it explodes
+
         //this.resetPlayer(); //resets player after hit
         this.time.addEvent({
             delay: 1000,        //delay after Hit
