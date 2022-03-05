@@ -1,4 +1,4 @@
-class mainscreen extends Phaser.Scene {
+class Mainscreen extends Phaser.Scene {
     constructor() {
         super('loadscreen') // for calling the parameter
     }

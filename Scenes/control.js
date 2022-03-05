@@ -1,4 +1,4 @@
-class control extends Phaser.Scene {
+class Control extends Phaser.Scene {
     constructor() {
         super("View");
     }

@@ -7,13 +7,13 @@ var config = {
     height: 500,
     autoCenter: true,
     background: 'black',
-    scene: [mainscreen, control, Scene1, Scene2],
+    scene: [Mainscreen, Control, Scene1, Scene2],
     pixelArt: true,
     //setting up  game physics
     physics: {
         default: "arcade",
         arcade: {
-            debug: true,
+            debug: false,
         }
     }
 }
