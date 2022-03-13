@@ -121,8 +121,6 @@ class Scene2 extends Phaser.Scene {
             this.scene.restart(),
             this.scene.switch("loadscreen")
         ));
-
-
     }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
@@ -142,7 +140,7 @@ class Scene2 extends Phaser.Scene {
 
         //this.resetPlayer(); //resets player after hit
         this.time.addEvent({
-            delay: 1000,        //delay after Hit
+            //delay: 1000,        //delay after Hit
             callback: this.resetPlayer, //calling reset player function
             callbackScope: this,
             loop: false,
@@ -152,9 +150,10 @@ class Scene2 extends Phaser.Scene {
 
     //function resetPlayer()
     resetPlayer() {
-        var x = config.width / 2 - 8;
-        var y = config.height + 64;
-        this.player.enableBody(true, x, y, true, true);  //reviving player again
+        this.scene.start("gameover");
+        /* var x = config.width / 2 - 8;
+        var y = config.height + 64; */
+        //this.player.enableBody(true, x, y, true, true);  //reviving player again
     }
 
     //callback function for hitenemy line 112
@@ -182,6 +181,8 @@ class Scene2 extends Phaser.Scene {
     destroyShip(pointer, gameObject) {
         gameObject.setTexture("explosion");
         gameObject.play("explode");
+
+
 
     }
 
@@ -244,5 +245,4 @@ class Scene2 extends Phaser.Scene {
             this.player.setVelocityY(gameSettings.playerSpeed);
         }
     }
-
 }
