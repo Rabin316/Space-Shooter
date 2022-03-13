@@ -167,7 +167,7 @@ class Scene2 extends Phaser.Scene {
         projectile.destroy();
         this.resetShipPos(enemy);
         //for counting score
-        this.score += 10;
+        this.score += 50;
         //var formatscore = this.scorezero(this.score, 6);
         this.scorevalue.text = "SCORE: " + this.score;   //can also put FormatSCore instead of this.score 
     }
@@ -202,6 +202,24 @@ class Scene2 extends Phaser.Scene {
 
     //upadte function for updating the objects
     update() {
+        //level 1
+        if (this.score >= 100) {
+            this.moveShip(this.ship1, 2.7);
+            this.moveShip(this.ship2, 2.7);
+            this.moveShip(this.ship3, 2.7);
+        }
+        //leve 2
+        if (this.score >= 300) {
+            this.moveShip(this.ship1, 3);
+            this.moveShip(this.ship2, 3);
+            this.moveShip(this.ship3, 3);
+        }
+        //leve 2
+        if (this.score >= 500) {
+            this.moveShip(this.ship1, 3.5);
+            this.moveShip(this.ship2, 3.5);
+            this.moveShip(this.ship3, 3.5);
+        }
         //this.ship2.angle += 3;
 
         // this.asteroid.angle += 1;
@@ -210,7 +228,7 @@ class Scene2 extends Phaser.Scene {
         //calling function moveShip
         this.moveShip(this.ship1, 2);
         this.moveShip(this.ship2, 2.5);
-        this.moveShip(this.ship3, 3);
+        this.moveShip(this.ship3, 2.5);
 
         //make images y-axis tile for repetation
         this.background.tilePositionY -= 0.5;
