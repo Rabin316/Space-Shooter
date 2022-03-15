@@ -46,6 +46,8 @@ class Scene2 extends Phaser.Scene {
         this.ship1.setScale(2);
         this.ship2 = this.add.sprite(config.width / 2, config.height, "ship2");
         this.ship3 = this.add.sprite(config.width / 2 + 50, config.height, "ship3");
+        this.ship5 = this.add.sprite(config.width / 2 + 50, config.height, "ship5");
+        this.ship5.setScale(2);
         // this.ship1.setScale(2);
         // this.ship1.flipY = true;
         // this.ship2.flipY = true;
@@ -56,6 +58,7 @@ class Scene2 extends Phaser.Scene {
         this.enemies.add(this.ship1);
         this.enemies.add(this.ship2);
         this.enemies.add(this.ship3);
+        this.enemies.add(this.ship5);
 
         //player sprite
         this.player = this.physics.add.sprite(config.width / 2 - 8, config.height - 64, "player");
@@ -65,11 +68,13 @@ class Scene2 extends Phaser.Scene {
         this.ship1.play("ship1_anim");
         this.ship2.play("ship2_anim");
         this.ship3.play("ship3_anim");
+        this.ship5.play("ship5_anim");
 
         //for making ships destryable by clicking
         this.ship1.setInteractive();
         this.ship2.setInteractive();
         this.ship3.setInteractive();
+        this.ship5.setInteractive();
         //this.asteroid.setInteractive();
 
         //event that acts whenever an interactive object is clicked or touched
@@ -178,6 +183,7 @@ class Scene2 extends Phaser.Scene {
         var explosion = new Explosion(this, player.x, player.y);
         player.disableBody(true, true);//disable the ship and hide it after it explodes
         this.explosionSound.play();
+        //this.levelupSound.play();
 
         //this.resetPlayer(); //resets player after hit
         this.time.addEvent({
@@ -193,7 +199,6 @@ class Scene2 extends Phaser.Scene {
     resetPlayer() {
         //this.scene.restart();
         this.scene.start("gameover");
-        //this.levelupSound.play();
         /* var x = config.width / 2 - 8;
         var y = config.height + 64; */
         //this.player.enableBody(true, x, y, true, true);  //reviving player again
@@ -240,24 +245,28 @@ class Scene2 extends Phaser.Scene {
             this.moveShip(this.ship1, 2);
             this.moveShip(this.ship2, 2);
             this.moveShip(this.ship3, 2);
+            this.moveShip(this.ship5, 2);
         }
         //leve 2
         if (this.score >= 300) {
             this.moveShip(this.ship1, 2.5);
             this.moveShip(this.ship2, 2.5);
             this.moveShip(this.ship3, 2.5);
+            this.moveShip(this.ship5, 2.5);
         }
         //leve 2
         if (this.score >= 500) {
             this.moveShip(this.ship1, 3.5);
             this.moveShip(this.ship2, 3.5);
             this.moveShip(this.ship3, 3.5);
+            this.moveShip(this.ship5, 3.5);
         }
-        //leve 2
+        //leve 3
         if (this.score >= 650) {
             this.moveShip(this.ship1, 4.5);
             this.moveShip(this.ship2, 4.5);
             this.moveShip(this.ship3, 4.5);
+            this.moveShip(this.ship5, 4.5);
         }
         //this.ship2.angle += 3;
 
@@ -268,6 +277,7 @@ class Scene2 extends Phaser.Scene {
         this.moveShip(this.ship1, 1.6);
         this.moveShip(this.ship2, 2);
         this.moveShip(this.ship3, 1.8);
+        this.moveShip(this.ship5, 1.8);
 
         //make images y-axis tile for repetation
         this.background.tilePositionY -= 0.5;

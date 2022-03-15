@@ -36,11 +36,15 @@ class Mainscreen extends Phaser.Scene {
         this.load.image("title", "assests1/title.png");
         //for bitmap text
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
+        //for audio
+        this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
 
 
     }
 
     create() {
+        //for audio
+        this.levelupSound = this.sound.add("audio_pickup");
         this.bg = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.bg.setOrigin(0, 0);
         this.title1 = this.add.image(config.width / 2, config.height * 0.30, "title").setScale(0.8);
@@ -132,9 +136,11 @@ class Mainscreen extends Phaser.Scene {
 
         //this part is for scene change by clicking
         playbutton.on('pointerdown', () => {
+            this.levelupSound.play();
             this.scene.switch("BootGame");
         });
         controlbtn.on('pointerdown', () => {
+            this.levelupSound.play();
             this.scene.switch("View");
         });
 
