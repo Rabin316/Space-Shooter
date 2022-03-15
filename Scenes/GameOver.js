@@ -9,9 +9,20 @@ class GameOver extends Phaser.Scene {
         this.load.image("back", "assests1/back.png");
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
         this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
+        this.load.audio("gameover", ["assests1/sounds/game_over.mp3"]);
     }
     create() {
         this.levelupSound = this.sound.add("audio_pickup");
+        this.gameover = this.sound.add("gameover", {
+            mute: false,
+            volume: 2,
+            rate: 1.5,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        });
+        //this.gameover.play();
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
         var retry = this.add.image(config.width / 2, config.height / 1.8, "retry").setScale(0.3);
@@ -60,7 +71,7 @@ class GameOver extends Phaser.Scene {
         })
     }
     update() {
-        //this.background.tilePositionY -= 0.5;
+        this.background.tilePositionY -= 0.5;
     }
 
 }

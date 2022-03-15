@@ -38,13 +38,25 @@ class Mainscreen extends Phaser.Scene {
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
         //for audio
         this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
-
+        this.load.audio("audio_space", ["assests1/sounds/Deepspace.mp3"]);
 
     }
 
     create() {
         //for audio
         this.levelupSound = this.sound.add("audio_pickup");
+        this.music = this.sound.add("audio_space");
+        var musicconfig = {
+            mute: false,
+            volume: 2,
+            rate: 1.5,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        this.music.play(musicconfig);
+
         this.bg = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.bg.setOrigin(0, 0);
         this.title1 = this.add.image(config.width / 2, config.height * 0.30, "title").setScale(0.8);

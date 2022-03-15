@@ -28,9 +28,14 @@ class Scene2 extends Phaser.Scene {
 
         //for audio
         this.beamSound = this.sound.add("audio_beam");
-        this.explosionSound = this.sound.add("audio_explosion");
+        this.explosionSound = this.sound.add("audio_explosion", {
+            mute: false,
+            volume: 3,
+            //rate: 0,
+            //detune: 0
+        });
         this.levelupSound = this.sound.add("audio_pickup");
-        this.music = this.sound.add("music");
+        //this.music = this.sound.add("music");
         /*    var musicconfig = {
                mute: false,
                volume: 1,
@@ -165,7 +170,7 @@ class Scene2 extends Phaser.Scene {
         //for SCore
         this.score = 0;
         //var formatscore = this.scorezero(this.score, 6)
-        this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 16);
+        this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 25);
     }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
