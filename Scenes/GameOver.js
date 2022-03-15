@@ -10,6 +10,10 @@ class GameOver extends Phaser.Scene {
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
         this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
         this.load.audio("gameover", ["assests1/sounds/game_over.mp3"]);
+        this.load.spritesheet("player", "assests1/spritesheets/player.png", {
+            frameWidth: 16,
+            frameHeight: 24
+        });
     }
     create() {
         this.levelupSound = this.sound.add("audio_pickup");
