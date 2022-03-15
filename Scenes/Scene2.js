@@ -2,9 +2,17 @@ class Scene2 extends Phaser.Scene {
     constructor() {
         super("PlayGame");  //passing parameter
     }
+    init() {
+
+    }
     preload() {
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
         this.load.image("left", "assests1/left.png");
+        //audio files
+        this.load.audio("audio_beam", ["assests1/sounds/beam.mp3"]);
+        this.load.audio("music", ["assests1/sounds/sci-fi_platformer12.mp3"]);
+        this.load.audio("audio_explosion", ["assests1/sounds/explosion.mp3"]);
+        this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
     }
     //function create for image creation after loading
     create() {
@@ -18,6 +26,21 @@ class Scene2 extends Phaser.Scene {
         // this.ship2 = this.add.image(config.width / 2, config.height / 2, "ship2");
         // this.ship3 = this.add.image(config.width / 2 + 50, config.height / 2, "ship3");
 
+        //for audio
+        this.beamSound = this.sound.add("audio_beam");
+        this.explosionSound = this.sound.add("audio_explosion");
+        this.levelupSound = this.sound.add("audio_pickup");
+        this.music = this.sound.add("music");
+        /*    var musicconfig = {
+               mute: false,
+               volume: 1,
+               rate: 1,
+               detune: 0,
+               seek: 0,
+               loop: false,
+               delay: 0
+           }
+           this.music.play(musicconfig); */
         //using sprites
         this.ship1 = this.add.sprite(config.width / 2 - 50, config.height, "ship1");
         this.ship1.setScale(2);
@@ -117,10 +140,27 @@ class Scene2 extends Phaser.Scene {
         turn.setInteractive({
             useHandCursor: true
         });
-        turn.on('pointerdown', () => this.clickButton(
-            this.scene.restart(),
-            this.scene.switch("loadscreen")
-        ));
+        turn.on('pointerdown', () => {
+            this.scene.restart();
+            this.scene.switch("loadscreen");
+        });
+
+        var graphics = this.add.graphics();
+        graphics.fillStyle(0x000000, 1);
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(config.width, 0);
+        graphics.lineTo(config.width, 20);
+        graphics.lineTo(0, 20);
+        graphics.lineTo(0, 0);
+
+        graphics.closePath();
+        graphics.fillPath();
+
+        //for SCore
+        this.score = 0;
+        //var formatscore = this.scorezero(this.score, 6)
+        this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 16);
     }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
@@ -150,7 +190,9 @@ class Scene2 extends Phaser.Scene {
 
     //function resetPlayer()
     resetPlayer() {
-        this.scene.start("gameover");
+        this.scene.restart();
+        this.scene.switch("gameover");
+        //this.levelupSound.play();
         /* var x = config.width / 2 - 8;
         var y = config.height + 64; */
         //this.player.enableBody(true, x, y, true, true);  //reviving player again
@@ -160,7 +202,13 @@ class Scene2 extends Phaser.Scene {
     hitEnemy(projectile, enemy) {
         var explosion = new Explosion(this, enemy.x, enemy.y);
         projectile.destroy();
+        //for counting score
+        this.score += 10;
+        //var formatscore = this.scorezero(this.score, 6);
+        this.scorevalue.text = "SCORE: " + this.score;   //can also put FormatSCore instead of this.score 
         this.resetShipPos(enemy);
+        //audio
+        this.explosionSound.play();
     }
 
     //function for moving ships y-axis and repeats and appears at random position from the top after reaching bottom of game config
@@ -180,14 +228,36 @@ class Scene2 extends Phaser.Scene {
     //for animation of explosion after being clicked
     destroyShip(pointer, gameObject) {
         gameObject.setTexture("explosion");
-        gameObject.play("explode");
-
-
+        //gameObject.play("explode");
 
     }
 
     //upadte function for updating the objects
     update() {
+        //level 1
+        if (this.score >= 100) {
+            this.moveShip(this.ship1, 2);
+            this.moveShip(this.ship2, 2);
+            this.moveShip(this.ship3, 2);
+        }
+        //leve 2
+        if (this.score >= 300) {
+            this.moveShip(this.ship1, 2.5);
+            this.moveShip(this.ship2, 2.5);
+            this.moveShip(this.ship3, 2.5);
+        }
+        //leve 2
+        if (this.score >= 500) {
+            this.moveShip(this.ship1, 3.5);
+            this.moveShip(this.ship2, 3.5);
+            this.moveShip(this.ship3, 3.5);
+        }
+        //leve 2
+        if (this.score >= 650) {
+            this.moveShip(this.ship1, 4.5);
+            this.moveShip(this.ship2, 4.5);
+            this.moveShip(this.ship3, 4.5);
+        }
         //this.ship2.angle += 3;
 
         // this.asteroid.angle += 1;
@@ -227,6 +297,7 @@ class Scene2 extends Phaser.Scene {
      } */
     shootBeam() {
         var beam = new Beam(this);
+        this.beamSound.play();  //audio
     }
     //function  for player movement
     movePlayerManager() {

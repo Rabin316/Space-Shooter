@@ -47,9 +47,9 @@ class Control extends Phaser.Scene {
             {
                 useHandCursor: true
             });
-        back.on('pointerdown', () => this.clickButton(
-            this.scene.switch("loadscreen")
-        ));
+        back.on('pointerdown', () => {
+            this.scene.switch("loadscreen");
+        });
         /*   var text = this.add.text(200, 240, "Controls");
           text.setInteractive(    //for making text interractive
               {
