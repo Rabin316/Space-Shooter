@@ -36,7 +36,7 @@ class Control extends Phaser.Scene {
         this.add.image(config.width / 5.3 + 30, config.height / 1.26, "downarrow").setScale(0.2)
         this.add.bitmapText(config.width / 5.3 + 55, config.height / 1.5 + 55, "pixelFont", "DOWN", 20)
 
-        this.add.image(config.width / 2 + 100, config.height / 3, "spacebar").setScale(0.25);
+        this.add.image(config.width / 2 + 100, config.height / 3.3, "spacebar").setScale(0.25);
         this.add.bitmapText(config.width / 2 + 70, config.height / 5.5 + 30, "pixelFont", "PRESS", 25);
         this.add.bitmapText(config.width / 2 + 60, config.height / 4 + 70, "pixelFont", "TO SHOOT", 25);
 

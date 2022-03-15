@@ -3,13 +3,14 @@ var gameSettings = {
     playerSpeed: 200,       //player speed when moved or played
 }
 var config = {
-    width: 500,
-    height: 500,
+    width: 480,
+    height: 640,
     autoCenter: true,
     background: 'black',
     banner: false,
     scene: [Mainscreen, Control, Scene1, Scene2, GameOver],
     pixelArt: true,
+    roundPixels: true,
     //setting up  game physics
     physics: {
         default: "arcade",
@@ -18,8 +19,9 @@ var config = {
         }
     },
     scale: {
-        // mode: Phaser.Scale.FIT,
-    },
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    }
 }
 //Declaration of our game object
 var game = new Phaser.Game(config);

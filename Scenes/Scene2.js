@@ -177,21 +177,22 @@ class Scene2 extends Phaser.Scene {
         // player.y = config.height - 64;
         var explosion = new Explosion(this, player.x, player.y);
         player.disableBody(true, true);//disable the ship and hide it after it explodes
+        this.explosionSound.play();
 
         //this.resetPlayer(); //resets player after hit
         this.time.addEvent({
-            //delay: 1000,        //delay after Hit
+            delay: 1000,        //delay after Hit
             callback: this.resetPlayer, //calling reset player function
             callbackScope: this,
-            loop: false,
+            loop: true,
         });
 
     }
 
     //function resetPlayer()
     resetPlayer() {
-        this.scene.restart();
-        this.scene.switch("gameover");
+        //this.scene.restart();
+        this.scene.start("gameover");
         //this.levelupSound.play();
         /* var x = config.width / 2 - 8;
         var y = config.height + 64; */
