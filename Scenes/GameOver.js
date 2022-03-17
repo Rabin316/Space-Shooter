@@ -31,6 +31,7 @@ class GameOver extends Phaser.Scene {
         this.background.setOrigin(0, 0);
         var retry = this.add.image(config.width / 2, config.height / 1.8, "retry").setScale(0.3);
         var mainmenu = this.add.image(config.width / 2, config.height / 1.6, "back").setScale(0.5);
+        this.add.bitmapText(config.width * 0.35, config.height * 0.43, "pixelFont", "Score : " + this.registry.score, 40);
         let hoversprite = this.add.sprite(100, 100, "player");
         hoversprite.setVisible(false);
         this.anims.create({

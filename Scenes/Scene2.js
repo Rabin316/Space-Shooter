@@ -168,7 +168,7 @@ class Scene2 extends Phaser.Scene {
         graphics.fillPath();
 
         //for SCore
-        this.score = 0;
+        this.registry.score = 0;
         //var formatscore = this.scorezero(this.score, 6)
         this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 25);
     }
@@ -195,9 +195,8 @@ class Scene2 extends Phaser.Scene {
             delay: 1000,        //delay after Hit
             callback: this.resetPlayer, //calling reset player function
             callbackScope: this,
-            loop: true,
+            loop: false,
         });
-
     }
 
     //function resetPlayer()
@@ -205,8 +204,8 @@ class Scene2 extends Phaser.Scene {
         //this.scene.restart();
         this.scene.start("gameover");
         /* var x = config.width / 2 - 8;
-        var y = config.height + 64; */
-        //this.player.enableBody(true, x, y, true, true);  //reviving player again
+        var y = config.height + 64;
+        this.player.enableBody(true, x, y, true, true);  */ //reviving player again
     }
 
     //callback function for hitenemy line 112
@@ -214,9 +213,9 @@ class Scene2 extends Phaser.Scene {
         var explosion = new Explosion(this, enemy.x, enemy.y);
         projectile.destroy();
         //for counting score
-        this.score += 10;
+        this.registry.score += 10;
         //var formatscore = this.scorezero(this.score, 6);
-        this.scorevalue.text = "SCORE: " + this.score;   //can also put FormatSCore instead of this.score 
+        this.scorevalue.text = "SCORE: " + this.registry.score;   //can also put FormatSCore instead of this.score 
         this.resetShipPos(enemy);
         //audio
         this.explosionSound.play();
@@ -246,28 +245,28 @@ class Scene2 extends Phaser.Scene {
     //upadte function for updating the objects
     update() {
         //level 1
-        if (this.score >= 100) {
+        if (this.registry.score >= 100) {
             this.moveShip(this.ship1, 2);
             this.moveShip(this.ship2, 2);
             this.moveShip(this.ship3, 2);
             this.moveShip(this.ship5, 2);
         }
         //leve 2
-        if (this.score >= 300) {
+        if (this.registry.score >= 300) {
             this.moveShip(this.ship1, 2.5);
             this.moveShip(this.ship2, 2.5);
             this.moveShip(this.ship3, 2.5);
             this.moveShip(this.ship5, 2.5);
         }
         //leve 2
-        if (this.score >= 500) {
+        if (this.registry.score >= 500) {
             this.moveShip(this.ship1, 3.5);
             this.moveShip(this.ship2, 3.5);
             this.moveShip(this.ship3, 3.5);
             this.moveShip(this.ship5, 3.5);
         }
         //leve 3
-        if (this.score >= 650) {
+        if (this.registry.score >= 650) {
             this.moveShip(this.ship1, 4.5);
             this.moveShip(this.ship2, 4.5);
             this.moveShip(this.ship3, 4.5);
