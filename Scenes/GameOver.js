@@ -17,16 +17,18 @@ class GameOver extends Phaser.Scene {
     }
     create() {
         this.levelupSound = this.sound.add("audio_pickup");
-        this.gameover = this.sound.add("gameover", {
+        this.gameovermusic = this.sound.add("gameover");
+        var gameoverconfig = {
             mute: false,
-            volume: 2,
+            volume: 0.5,
             rate: 1.5,
             detune: 0,
             seek: 0,
             loop: false,
             delay: 0
-        });
-        //this.gameover.play();
+        }
+        this.gameovermusic.play(gameoverconfig);
+        this.sound.get("audio_space").stop();
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
         var retry = this.add.image(config.width / 2, config.height / 1.8, "retry").setScale(0.3);
@@ -47,7 +49,9 @@ class GameOver extends Phaser.Scene {
             });
         mainmenu.on('pointerdown', () => {
             this.levelupSound.play();
-            this.scene.switch("loadscreen");
+            this.scene.switch("loadscreen",);
+            this.gameovermusic.stop(gameoverconfig);
+            this.sound.get("audio_space").play();
         });
         this.gameover = this.add.image(config.width / 2, config.height * 0.30, "gameover").setScale(0.8);
         retry.setInteractive(    //for making  interractive clickable
@@ -57,6 +61,8 @@ class GameOver extends Phaser.Scene {
         retry.on('pointerdown', () => {
             this.levelupSound.play();
             this.scene.start("PlayGame");
+            this.gameovermusic.stop(gameoverconfig);
+            this.sound.get("audio_space").play();
         });
         mainmenu.on("pointerover", () => {
             hoversprite.setVisible(true);

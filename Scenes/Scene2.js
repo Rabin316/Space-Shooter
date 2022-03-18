@@ -13,6 +13,7 @@ class Scene2 extends Phaser.Scene {
         this.load.audio("music", ["assests1/sounds/sci-fi_platformer12.mp3"]);
         this.load.audio("audio_explosion", ["assests1/sounds/explosion.mp3"]);
         this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
+        //this.load.audio("audio_space", ["assests1/sounds/Deepspace.mp3"]);
     }
     //function create for image creation after loading
     create() {
@@ -30,7 +31,7 @@ class Scene2 extends Phaser.Scene {
         this.beamSound = this.sound.add("audio_beam");
         this.explosionSound = this.sound.add("audio_explosion", {
             mute: false,
-            volume: 3,
+            volume: 2,
             //rate: 0,
             //detune: 0
         });
@@ -171,6 +172,7 @@ class Scene2 extends Phaser.Scene {
         this.registry.score = 0;
         //var formatscore = this.scorezero(this.score, 6)
         this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 25);
+        //this.addEvents();
     }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
@@ -198,11 +200,19 @@ class Scene2 extends Phaser.Scene {
             loop: false,
         });
     }
+    /*  addEvents() {
+         this.input.on("pointermove", pointer => {
+             this.player.x = pointer.x;
+             this.player.y = pointer.y;
+         })
+     } */
+
 
     //function resetPlayer()
     resetPlayer() {
         //this.scene.restart();
         this.scene.start("gameover");
+        this.sound.get("audio_space").stop();
         /* var x = config.width / 2 - 8;
         var y = config.height + 64;
         this.player.enableBody(true, x, y, true, true);  */ //reviving player again
@@ -264,13 +274,14 @@ class Scene2 extends Phaser.Scene {
             this.moveShip(this.ship2, 3.5);
             this.moveShip(this.ship3, 3.5);
             this.moveShip(this.ship5, 3.5);
+
         }
         //leve 3
         if (this.registry.score >= 650) {
-            this.moveShip(this.ship1, 4.5);
-            this.moveShip(this.ship2, 4.5);
-            this.moveShip(this.ship3, 4.5);
-            this.moveShip(this.ship5, 4.5);
+            this.moveShip(this.ship1, 5.5);
+            this.moveShip(this.ship2, 5.5);
+            this.moveShip(this.ship3, 5.5);
+            this.moveShip(this.ship5, 5.5);
         }
         //this.ship2.angle += 3;
 

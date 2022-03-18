@@ -14,8 +14,10 @@ class Control extends Phaser.Scene {
         this.load.image("downarrow", "assests1/downarrow.png");
         this.load.image("spacebar", "assests1/spacebarkey.png");
         this.load.image("left", "assests1/left.png");
+        this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
     }
     create() {
+        this.levelupSound = this.sound.add("audio_pickup");
         this.bg2 = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.bg2.setOrigin(0, 0);
         this.add.image(config.width / 2, config.height * 0.10, "howtoplay").setScale(0.5);
@@ -48,7 +50,9 @@ class Control extends Phaser.Scene {
                 useHandCursor: true
             });
         back.on('pointerdown', () => {
+            this.levelupSound.play();
             this.scene.switch("loadscreen");
+
         });
         /*   var text = this.add.text(200, 240, "Controls");
           text.setInteractive(    //for making text interractive
