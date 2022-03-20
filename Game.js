@@ -19,7 +19,7 @@ var config = {
         }
     },
     scale: {
-        mode: Phaser.Scale.FIT,
+        //mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     }
 }
