@@ -2,9 +2,6 @@ class Scene2 extends Phaser.Scene {
     constructor() {
         super("PlayGame");  //passing parameter
     }
-    init() {
-
-    }
     preload() {
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
         //audio files
@@ -13,6 +10,7 @@ class Scene2 extends Phaser.Scene {
         this.load.audio("audio_explosion", ["assests1/sounds/explosion.mp3"]);
         this.load.audio("audio_pickup", ["assests1/sounds/pickup.mp3"]);
         //this.load.audio("audio_space", ["assests1/sounds/Deepspace.mp3"]);
+        this.load.image("live","assests1/heart.png");
     }
     //function create for image creation after loading
     create() {
@@ -25,6 +23,8 @@ class Scene2 extends Phaser.Scene {
         // this.ship1 = this.add.image(config.width / 2 - 50, config.height / 2, "ship1");
         // this.ship2 = this.add.image(config.width / 2, config.height / 2, "ship2");
         // this.ship3 = this.add.image(config.width / 2 + 50, config.height / 2, "ship3");
+        this.live=this.add.image(config.width*0.8 + 85, config.height * 0.018 , "live").setDepth(1);
+        this.live.setScale(0.6);
 
         //for audio
         this.beamSound = this.sound.add("audio_beam");
@@ -179,7 +179,7 @@ class Scene2 extends Phaser.Scene {
         this.addEvents();
         //  Lives
         this.lives = 3;
-        this.livevalue = this.add.bitmapText(config.width - 50, 5, "pixelFont", "lives:3x", 25);
+        this.livevalue = this.add.bitmapText(config.width - 80, 5,"pixelFont", "lives: 3", 25);
     }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
@@ -190,7 +190,7 @@ class Scene2 extends Phaser.Scene {
     damageplayer(player, enemy) {
         this.resetShipPos(enemy);   //resets position enemy ships
         this.lives -= 1;
-        this.livevalue.text = "live:" + this.lives;
+        this.livevalue.text = "lives: " + this.lives;
         if (this.player.alpha < 1) {
             return;
         }
@@ -205,7 +205,7 @@ class Scene2 extends Phaser.Scene {
         });
     }
     addEvents() {
-        this.player.setVelocity(-1);
+        this.player.setVelocity(0);
         this.input.on("pointermove", pointer => {
             this.player.x = pointer.x;
             this.player.y = pointer.y;
