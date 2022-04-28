@@ -7,7 +7,6 @@ class Scene2 extends Phaser.Scene {
     }
     preload() {
         this.load.bitmapFont("pixelFont", "assests1/font/font.png", "assests1/font/font.xml");
-        this.load.image("left", "assests1/left.png");
         //audio files
         this.load.audio("audio_beam", ["assests1/sounds/beam.mp3"]);
         this.load.audio("music", ["assests1/sounds/sci-fi_platformer12.mp3"]);
@@ -152,14 +151,14 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemies, this.damageplayer, null, this);
         this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
 
-        var turn = this.add.image(config.width / 2, config.height * 0.93, "left").setScale(0.15);
+       /*  var turn = this.add.image(config.width / 2, config.height * 0.93, "left").setScale(0.15);
         turn.setInteractive({
             useHandCursor: true
         });
         turn.on('pointerdown', () => {
             this.scene.restart();
             this.scene.start("loadscreen");
-        });
+        }); */
 
         var graphics = this.add.graphics();
         graphics.fillStyle(0x000000, 1);
@@ -178,6 +177,9 @@ class Scene2 extends Phaser.Scene {
         //var formatscore = this.scorezero(this.score, 6)
         this.scorevalue = this.add.bitmapText(10, 5, "pixelFont", "SCORE:0", 25);
         this.addEvents();
+        //  Lives
+        this.lives = 3;
+        this.livevalue = this.add.bitmapText(config.width - 50, 5, "pixelFont", "lives:3x", 25);
     }
     //callback Function for powerUps pick up
     /*    pickPowerUp(player, powerUp) {
@@ -187,17 +189,14 @@ class Scene2 extends Phaser.Scene {
     //callback function for damageplayer line 111
     damageplayer(player, enemy) {
         this.resetShipPos(enemy);   //resets position enemy ships
-
-        // this.scene.pause();       for pausing when player get hit
-        //resets position of player
-        // player.x = config.width / 2 - 8;
-        // player.y = config.height - 64;
+        this.lives -= 1;
+        this.livevalue.text = "live:" + this.lives;
+        if (this.player.alpha < 1) {
+            return;
+        }
         var explosion = new Explosion(this, player.x, player.y);
-        player.disableBody(true, true);//disable the ship and hide it after it explodes
+        this.player.disableBody(true, true);//disable the ship and hide it after it explodes
         this.explosionSound.play();
-        //this.levelupSound.play();
-
-        //this.resetPlayer(); //resets player after hit
         this.time.addEvent({
             delay: 1000,        //delay after Hit
             callback: this.resetPlayer, //calling reset player function
@@ -216,12 +215,27 @@ class Scene2 extends Phaser.Scene {
 
     //function resetPlayer()
     resetPlayer() {
-        //this.scene.restart();
-        this.scene.start("gameover");
-        this.sound.get("audio_space").stop();
-        /* var x = config.width / 2 - 8;
+        var x = config.width / 2 - 8;
         var y = config.height + 64;
-        this.player.enableBody(true, x, y, true, true);  */ //reviving player again
+        this.player.enableBody(true, x, y, true, true);
+        if (this.lives < 1) {
+            this.scene.start("gameover");
+            this.sound.get("audio_space").stop();
+        }
+        //making player transparent
+        this.player.alpha = 0.5;
+
+        var tween = this.tweens.add({
+            targets: this.player,
+            y: config.height - 64,
+            ease: 'Power1',
+            duration: 1500,
+            repeat: 0,
+            onComplete: function () {
+                this.player.alpha = 1;
+            },
+            callbackScope: this
+        });
     }
 
     //callback function for hitenemy line 112
