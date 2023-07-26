@@ -6,7 +6,7 @@ This is a 2D space shooter game developed using Phaser.js, HTML5, and CSS. The g
 - Set up a local server using XAMPP or any other server of your choice.
 - Place the game files in the appropriate directory of your local server (e.g., htdocs for XAMPP).
 - Access the game through your web browser by navigating to http://localhost/your_game_directory.
-- 
+
 ## Gameplay
 - Use the arrow keys (up, down, left, right) to control the player's spaceship.
 - Press the spacebar to shoot bullets and destroy enemy spaceships.
